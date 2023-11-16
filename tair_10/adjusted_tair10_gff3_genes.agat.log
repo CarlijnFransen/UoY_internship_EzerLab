@@ -1,0 +1,149 @@
+                            11/15/2023 at 15h10m09s                             
+
+
+ ------------------------------------------------------------------------------
+|   Another GFF Analysis Toolkit (AGAT) - Version: v1.2.0                      |
+|   https://github.com/NBISweden/AGAT                                          |
+|   National Bioinformatics Infrastructure Sweden (NBIS) - www.nbis.se         |
+ ------------------------------------------------------------------------------
+                                        
+                                       
+                          ------ Start parsing ------                           
+-------------------------- parse options and metadata --------------------------
+=> Accessing the feature_levels YAML file
+Using standard /shared/storage/biology/rsrch/de656/lab/projects/project_CarlijnFransen/miniconda/envs/rna_stuff/lib/perl5/site_perl/auto/share/dist/AGAT/feature_levels.yaml file
+=> Attribute used to group features when no Parent/ID relationship exists (i.e common tag):
+	* locus_tag
+	* gene_id
+=> merge_loci option deactivated
+=> Machine information:
+	This script is being run by perl v5.32.1
+	Bioperl location being used: /shared/storage/biology/rsrch/de656/lab/projects/project_CarlijnFransen/miniconda/envs/rna_stuff/lib/perl5/site_perl/Bio/
+	Operating system being used: linux 
+=> Accessing Ontology
+	No ontology accessible from the gff file header!
+	We use the SOFA ontology distributed with AGAT:
+		/shared/storage/biology/rsrch/de656/lab/projects/project_CarlijnFransen/miniconda/envs/rna_stuff/lib/perl5/site_perl/auto/share/dist/AGAT/so.obo
+	Read ontology /shared/storage/biology/rsrch/de656/lab/projects/project_CarlijnFransen/miniconda/envs/rna_stuff/lib/perl5/site_perl/auto/share/dist/AGAT/so.obo:
+		4 root terms, and 2596 total terms, and 1516 leaf terms
+	Filtering ontology:
+The feature type (3rd column) is constrained to be either a term from the Sequence Ontology or an SO accession number. The latter alternative is distinguished using the syntax SO:000000. In either case, it must be sequence_feature (SO:0000110) or an is_a child of it.
+We filter the ontology to apply this rule.		We found 1861 terms that are sequence_feature or is_a child of it.
+--------------------------------- parsing file ---------------------------------
+=> Number of line in file: 576173
+=> Number of comment lines: 0
+=> Fasta included: No
+=> Number of features lines: 576173
+=> Number of feature type (3rd column): 17
+	* Level1: 3 => chromosome gene pseudogene
+	* level2: 8 => mRNA snoRNA tRNA snRNA miRNA rRNA ncRNA pseudogenic_transcript
+	* level3: 6 => exon CDS protein three_prime_UTR five_prime_UTR pseudogenic_exon
+	* unknown: 0 => 
+=> Version of the Bioperl GFF parser selected by AGAT: 3
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	3760	5630	.	+	.	Derives_from "AT1G01010.1"  ; ID "AT1G01010.1-Protein"  ; Name "AT1G01010.1" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	3760	5630	.	+	.	Derives_from "AT1G01010.1"  ; ID "AT1G01010.1-Protein"  ; Name "AT1G01010.1" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	6915	8666	.	-	.	Derives_from "AT1G01020.1"  ; ID "AT1G01020.1-Protein"  ; Name "AT1G01020.1" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	6915	8666	.	-	.	Derives_from "AT1G01020.1"  ; ID "AT1G01020.1-Protein"  ; Name "AT1G01020.1" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	7315	8666	.	-	.	Derives_from "AT1G01020.2"  ; ID "AT1G01020.2-Protein"  ; Name "AT1G01020.2" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	7315	8666	.	-	.	Derives_from "AT1G01020.2"  ; ID "AT1G01020.2-Protein"  ; Name "AT1G01020.2" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	11864	12940	.	-	.	Derives_from "AT1G01030.1"  ; ID "AT1G01030.1-Protein"  ; Name "AT1G01030.1" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	11864	12940	.	-	.	Derives_from "AT1G01030.1"  ; ID "AT1G01030.1-Protein"  ; Name "AT1G01030.1" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	23519	31079	.	+	.	Derives_from "AT1G01040.1"  ; ID "AT1G01040.1-Protein"  ; Name "AT1G01040.1" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	23519	31079	.	+	.	Derives_from "AT1G01040.1"  ; ID "AT1G01040.1-Protein"  ; Name "AT1G01040.1" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	23519	31079	.	+	.	Derives_from "AT1G01040.2"  ; ID "AT1G01040.2-Protein"  ; Name "AT1G01040.2" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	23519	31079	.	+	.	Derives_from "AT1G01040.2"  ; ID "AT1G01040.2-Protein"  ; Name "AT1G01040.2" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	31382	32670	.	-	.	Derives_from "AT1G01050.1"  ; ID "AT1G01050.1-Protein"  ; Name "AT1G01050.1" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	31382	32670	.	-	.	Derives_from "AT1G01050.1"  ; ID "AT1G01050.1-Protein"  ; Name "AT1G01050.1" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	33992	37061	.	-	.	Derives_from "AT1G01060.1"  ; ID "AT1G01060.1-Protein"  ; Name "AT1G01060.1" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	33992	37061	.	-	.	Derives_from "AT1G01060.1"  ; ID "AT1G01060.1-Protein"  ; Name "AT1G01060.1" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	33992	37061	.	-	.	Derives_from "AT1G01060.2"  ; ID "AT1G01060.2-Protein"  ; Name "AT1G01060.2" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	33992	37061	.	-	.	Derives_from "AT1G01060.2"  ; ID "AT1G01060.2-Protein"  ; Name "AT1G01060.2" 
+WARNING level3: No Parent attribute found @ for the feature: Chr1	TAIR10	protein	33992	37061	.	-	.	Derives_from "AT1G01060.3"  ; ID "AT1G01060.3-Protein"  ; Name "AT1G01060.3" 
+WARNING level3: No Parent attribute found  ************** Too much WARNING message we skip the next **************
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. @ the feature is:
+Chr1	TAIR10	protein	33992	37061	.	-	.	Derives_from "AT1G01060.3"  ; ID "AT1G01060.3-Protein"  ; Name "AT1G01060.3" 
+WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus.  ************** Too much WARNING message we skip the next **************
+35386 warning messages: WARNING gff3 reader: Hmmm, be aware that your feature doesn't contain any Parent and locus tag. No worries, we will handle it by considering it as strictly sequential. If you disagree, please provide an ID or a comon tag by locus. 
+35386 warning messages: WARNING level3: No Parent attribute found 
+                  ------ End parsing (done in 84 second) ------                 
+
+
+                           ------ Start checks ------                           
+---------------------------- Check1: feature types -----------------------------
+----------------------------------- ontology -----------------------------------
+INFO - Feature types not expected by the GFF3 specification:
+* protein
+The feature type (3rd column in GFF3) is constrained to be either a term from th
+e Sequence Ontology or an SO accession number. The latter alternative is disting
+uished using the syntax SO:000000. In either case, it must be sequence_feature (
+SO:0000110) or an is_a child of it.To follow rigorously the gff3 format, please 
+visit this website:
+https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
+------------------------------------- agat -------------------------------------
+AGAT can deal with all the encountered feature types (3rd column)
+------------------------------ done in 0 seconds -------------------------------
+
+------------------------------ Check2: duplicates ------------------------------
+None found
+------------------------------ done in 0 seconds -------------------------------
+
+-------------------------- Check3: sequential bucket ---------------------------
+We found 35386 level3 sequential cases.
+------------------------------ done in 5 seconds -------------------------------
+
+--------------------------- Check4: l2 linked to l3 ----------------------------
+No problem found
+------------------------------ done in 0 seconds -------------------------------
+
+--------------------------- Check5: l1 linked to l2 ----------------------------
+No problem found
+------------------------------ done in 0 seconds -------------------------------
+
+--------------------------- Check6: remove orphan l1 ---------------------------
+We remove only those not supposed to be orphan
+None found
+------------------------------ done in 1 seconds -------------------------------
+
+------------------------- Check7: all level3 locations -------------------------
+------------------------------ done in 15 seconds ------------------------------
+
+------------------------------ Check8: check cds -------------------------------
+No problem found
+------------------------------ done in 0 seconds -------------------------------
+
+----------------------------- Check9: check exons ------------------------------
+No exons created
+No exons locations modified
+No supernumerary exons removed
+No level2 locations modified
+------------------------------ done in 12 seconds ------------------------------
+
+----------------------------- Check10: check utrs ------------------------------
+No UTRs created
+No UTRs locations modified
+No supernumerary UTRs removed
+------------------------------ done in 7 seconds -------------------------------
+
+------------------------ Check11: all level2 locations -------------------------
+No problem found
+------------------------------ done in 13 seconds ------------------------------
+
+------------------------ Check12: all level1 locations -------------------------
+No problem found
+------------------------------ done in 1 seconds -------------------------------
+
+---------------------- Check13: remove identical isoforms ----------------------
+None found
+------------------------------ done in 2 seconds -------------------------------
+                  ------ End checks (done in 56 second) ------                  
+
+
