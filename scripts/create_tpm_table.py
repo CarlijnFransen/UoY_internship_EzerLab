@@ -1,5 +1,8 @@
 #!/bin/python
 
+#TODO: update script with comments
+#TODO: update script with functions
+
 #script to convert RSEM output in various folders to one TPM table
 from os import listdir
 import sys
