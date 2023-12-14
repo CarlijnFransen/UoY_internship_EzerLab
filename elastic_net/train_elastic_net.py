@@ -6,6 +6,7 @@
 #Usage:
 
 
+
 # This is changed to include a parallel loop and more verbosity of output!
 
 import numpy as np
@@ -28,7 +29,7 @@ import argparse
 
 def custom_loocv_single(
     sample_pos: int,
-    sample_names: list[str],
+    sample_names: list(str),
     input_pheno: np.array,
     input_expr: pd.DataFrame,
     model_fn,
@@ -71,6 +72,9 @@ def run_model_with_parallel_loocv(
         model_fn: A function which will take an array of expression values and an
             array of phenotypes, and return an arbitrary modelling output.
         verbose (bool, optional): whether to print steps. Defaults to True.
+        
+    Returns:
+        _type_: _description_
     """
 
     # validate whether there are the same number of samples as phenotypes
@@ -134,28 +138,6 @@ def elastic_net_model_fn(
     return regr.fit(x_values, y_values)
 
 
-# # regularised logistic regressions with enet
-# def logistic_model_fn(
-#     x_values: np.array,
-#     y_values: np.array  # dtype must be bool
-# ) -> LogisticRegressionCV:
-
-#     l1_list =  [.1, .5, .7, .9, .95, .99, 1]
-
-#     regr = LogisticRegressionCV(
-#         Cs = 10,
-#         l1_ratios = l1_list,
-#         penalty = 'elasticnet',
-#         cv = 5,  # automatically chooses set to 5-fold validation
-#         random_state = 0,
-#         solver = 'saga',
-#         scoring = 'neg_log_loss',
-#         max_iter = 10**3,
-#         verbose = 1,
-#         n_jobs = 1 # do NOT parallelise the 5-fold CV
-#     )
-
-#     return regr.fit(x_values, y_values)
 
 
 if __name__ == "__main__":
