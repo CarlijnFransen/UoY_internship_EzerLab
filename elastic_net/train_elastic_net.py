@@ -144,30 +144,30 @@ if __name__ == "__main__":
 
     # load the datasets
     expr_df = pd.read_csv("data/TPM_z_scored.csv", index_col = 0)
-    regs_df = pd.read_csv("data/TPM_z_scored_only_regs.csv", index_col = 0)
+    #regs_df = pd.read_csv("data/TPM_z_scored_only_regs.csv", index_col = 0)
     pheno_df = pd.read_csv("data/phenos_to_predict.csv", index_col = 0)
 
-    # # DURING TESTING - MAKE A BABY DATASET!
-    # nrow, ncol = expr_df.shape
-    # choose_samples = np.random.choice(np.arange(0, ncol), size = 20, replace = False)
-    # choose_genes = np.random.choice(np.arange(0, nrow), size = 500, replace = False)
+    # during testing - make a baby dataset!
+    nrow, ncol = expr_df.shape
+    choose_samples = np.random.choice(np.arange(0, ncol), size = 20, replace = false)
+    choose_genes = np.random.choice(np.arange(0, nrow), size = 500, replace = false)
 
-    # baby_expr = expr_df.iloc[choose_genes, choose_samples]
-    # baby_pheno = pheno_df.iloc[choose_samples, :]
+    baby_expr = expr_df.iloc[choose_genes, choose_samples]
+    baby_pheno = pheno_df.iloc[choose_samples, :]
 
-    # # test linear regression
-    # baby_leaf_output = run_model_with_parallel_loocv(
-    #     baby_expr,
-    #     baby_pheno["leaf_avg"].values,
-    #     elastic_net_model_fn
-    # )
+    # test linear regression
+    baby_leaf_output = run_model_with_parallel_loocv(
+        baby_expr,
+        baby_pheno["leaf_avg"].values,
+        elastic_net_model_fn
+    )
 
-    # # test logistic regression
-    # baby_bolting_output = run_model_with_parallel_loocv(
-    #     baby_expr,
-    #     (baby_pheno["bolting"].values == "Y"),
-    #     logistic_model_fn
-    # )
+    # test logistic regression
+    baby_bolting_output = run_model_with_parallel_loocv(
+        baby_expr,
+        (baby_pheno["bolting"].values == "y"),
+        #logistic_model_fn
+    )
 
 
     # Use argparse to decide whether to run all possible l1_ratio or just fixed ...
