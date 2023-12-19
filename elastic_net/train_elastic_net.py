@@ -29,7 +29,7 @@ import argparse
 
 def custom_loocv_single(
     sample_pos: int,
-    sample_names: list(str),
+    sample_names: list,
     input_pheno: np.array,
     input_expr: pd.DataFrame,
     model_fn,
@@ -143,31 +143,31 @@ def elastic_net_model_fn(
 if __name__ == "__main__":
 
     # load the datasets
-    expr_df = pd.read_csv("data/TPM_z_scored.csv", index_col = 0)
+    expr_df = pd.read_csv("elastic_net/data/tnz_ws2_ril_TPM_table_only_control.csv", index_col = 0)
     #regs_df = pd.read_csv("data/TPM_z_scored_only_regs.csv", index_col = 0)
-    pheno_df = pd.read_csv("data/phenos_to_predict.csv", index_col = 0)
+    pheno_df = pd.read_csv("elastic_net/data/phenotypes.csv", index_col = 0, sep=';')
 
-    # during testing - make a baby dataset!
-    nrow, ncol = expr_df.shape
-    choose_samples = np.random.choice(np.arange(0, ncol), size = 20, replace = false)
-    choose_genes = np.random.choice(np.arange(0, nrow), size = 500, replace = false)
+    ## during testing - make a baby dataset!
+    #nrow, ncol = expr_df.shape
+    #choose_samples = np.random.choice(np.arange(0, ncol), size = 20, replace = False)
+    #choose_genes = np.random.choice(np.arange(0, nrow), size = 500, replace = False)
 
-    baby_expr = expr_df.iloc[choose_genes, choose_samples]
-    baby_pheno = pheno_df.iloc[choose_samples, :]
+    #baby_expr = expr_df.iloc[choose_genes, choose_samples]
+    #baby_pheno = pheno_df.iloc[choose_samples, :]
 
     # test linear regression
-    baby_leaf_output = run_model_with_parallel_loocv(
-        baby_expr,
-        baby_pheno["leaf_avg"].values,
-        elastic_net_model_fn
-    )
+    #baby_leaf_output = run_model_with_parallel_loocv(
+    #    baby_expr,
+    #    baby_pheno["leaf_avg"].values,
+    #    elastic_net_model_fn
+    #)
 
     # test logistic regression
-    baby_bolting_output = run_model_with_parallel_loocv(
-        baby_expr,
-        (baby_pheno["bolting"].values == "y"),
-        #logistic_model_fn
-    )
+    #baby_bolting_output = run_model_with_parallel_loocv(
+    #    baby_expr,
+    #    (baby_pheno["bolting"].values == "y"),
+    #    #logistic_model_fn
+    #)
 
 
     # Use argparse to decide whether to run all possible l1_ratio or just fixed ...
@@ -176,88 +176,88 @@ if __name__ == "__main__":
     parser.add_argument("-f", action="store_true")
     args = parser.parse_args()
 
-    if (args.f):
+    if (args.f): 
         # run linear regression with only fixed l1_ratio
         print("Running elastic nets with fixed l1_ratio ...")
 
         print("Leaf size with all genes, l1_ratio = 0.5")
         leaf_enet_output = run_model_with_parallel_loocv(
             expr_df,
-            pheno_df["leaf_avg"],
+            pheno_df["average_flowering_time"],
             functools.partial(
                 elastic_net_model_fn,
                 l1_list = [.5]
             )
         )
-        pickle.dump(leaf_enet_output, open("outputs/leaf_enet_05.sav", "wb"))
+        pickle.dump(leaf_enet_output, open("elastic_net/outputs/leaf_enet_05.sav", "wb"))
 
-        print("Leaf size with regulators, l1_ratio = 0.1")
-        leaf_regs_enet_output = run_model_with_parallel_loocv(
-            regs_df,
-            pheno_df["leaf_avg"],
-            functools.partial(
-                elastic_net_model_fn,
-                l1_list = [.1]
-            )
-        )
-        pickle.dump(leaf_regs_enet_output, open("outputs/leaf_regs_enet_01.sav", "wb"))
+        # print("Leaf size with regulators, l1_ratio = 0.1")
+        # leaf_regs_enet_output = run_model_with_parallel_loocv(
+        #     #regs_df,
+        #     pheno_df["average_flowering_time"],
+        #     functools.partial(
+        #         elastic_net_model_fn,
+        #         l1_list = [.1]
+        #     )
+        # )
+        # pickle.dump(leaf_regs_enet_output, open("elastic_net/outputs/leaf_regs_enet_01.sav", "wb"))
 
-        print("Biomass with all genes, l1_ratio = 0.1")
-        biomass_enet_output = run_model_with_parallel_loocv(
-            expr_df,
-            pheno_df["biomass"],
-            functools.partial(
-                elastic_net_model_fn,
-                l1_list = [.1]
-            )
-        )
-        pickle.dump(biomass_enet_output, open("outputs/biomass_enet_01.sav", "wb"))
+        # print("Biomass with all genes, l1_ratio = 0.1")
+        # biomass_enet_output = run_model_with_parallel_loocv(
+        #     expr_df,
+        #     pheno_df["biomass"],
+        #     functools.partial(
+        #         elastic_net_model_fn,
+        #         l1_list = [.1]
+        #     )
+        # )
+        # pickle.dump(biomass_enet_output, open("elastic_net/outputs/biomass_enet_01.sav", "wb"))
 
-        print("Biomass with regulators, l1_ratio = 0.1")
-        biomass_regs_enet_output = run_model_with_parallel_loocv(
-            regs_df,
-            pheno_df["biomass"],
-            functools.partial(
-                elastic_net_model_fn,
-                l1_list = [.1]
-            )
-        )
+        # print("Biomass with regulators, l1_ratio = 0.1")
+        # biomass_regs_enet_output = run_model_with_parallel_loocv(
+        #     regs_df,
+        #     pheno_df["biomass"],
+        #     functools.partial(
+        #         elastic_net_model_fn,
+        #         l1_list = [.1]
+        #     )
+        # )
 
-        pickle.dump(biomass_regs_enet_output, open("outputs/biomass_regs_enet_01.sav", "wb"))
+        # pickle.dump(biomass_regs_enet_output, open("elastic_net/outputs/biomass_regs_enet_01.sav", "wb"))
     
     else: 
         # run linear regression in all possible combos
         print("Running elastic nets with varying l1_ratio ...")
-
+        #print(pheno_df)
         print("Leaf size with all genes")
         leaf_enet_output = run_model_with_parallel_loocv(
             expr_df,
-            pheno_df["leaf_avg"],
+            pheno_df["average_flowering_time"],
             elastic_net_model_fn
         )
-        pickle.dump(leaf_enet_output, open("outputs/leaf_enet.sav", "wb"))
+        pickle.dump(leaf_enet_output, open("elastic_net/outputs/leaf_enet.sav", "wb"))
 
-        print("Leaf size with regulators")
-        leaf_regs_enet_output = run_model_with_parallel_loocv(
-            regs_df,
-            pheno_df["leaf_avg"],
-            elastic_net_model_fn
-        )
-        pickle.dump(leaf_regs_enet_output, open("outputs/leaf_regs_enet.sav", "wb"))
+        # print("Leaf size with regulators")
+        # leaf_regs_enet_output = run_model_with_parallel_loocv(
+        #     regs_df,
+        #     pheno_df["average_flowering_time"],
+        #     elastic_net_model_fn
+        # )
+        # pickle.dump(leaf_regs_enet_output, open("elastic_net/outputs/leaf_regs_enet.sav", "wb"))
 
-        print("Biomass with all genes")
-        biomass_enet_output = run_model_with_parallel_loocv(
-            expr_df,
-            pheno_df["biomass"],
-            elastic_net_model_fn
-        )
-        pickle.dump(biomass_enet_output, open("outputs/biomass_enet.sav", "wb"))
+        # print("Biomass with all genes")
+        # biomass_enet_output = run_model_with_parallel_loocv(
+        #     expr_df,
+        #     pheno_df["biomass"],
+        #     elastic_net_model_fn
+        # )
+        # pickle.dump(biomass_enet_output, open("elastic_net/outputs/biomass_enet.sav", "wb"))
 
-        print("Biomass with regulators")
-        biomass_regs_enet_output = run_model_with_parallel_loocv(
-            regs_df,
-            pheno_df["biomass"],
-            elastic_net_model_fn
-        )
+        # print("Biomass with regulators")
+        # biomass_regs_enet_output = run_model_with_parallel_loocv(
+        #     regs_df,
+        #     pheno_df["biomass"],
+        #     elastic_net_model_fn
+        # )
 
-        pickle.dump(biomass_regs_enet_output, open("outputs/biomass_regs_enet.sav", "wb"))
+        # pickle.dump(biomass_regs_enet_output, open("outputs/biomass_regs_enet.sav", "wb"))
