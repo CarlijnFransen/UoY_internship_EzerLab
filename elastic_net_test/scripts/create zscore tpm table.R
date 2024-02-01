@@ -1,6 +1,6 @@
 TPM_table_only_control <- read.csv("~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/tnz_ws2_ril_TPM_table_only_control_2.csv", row.names=1)
 
-
+#zscore function from Daphne Ezer
 zscore <- function(mat, direction=1){
   apply(mat,direction,  function(i){
     (i-mean(i))/sd(i)
@@ -9,30 +9,36 @@ zscore <- function(mat, direction=1){
 library(dplyr)
 
 
-
+#create zscore table
 zscore_tpm_table <- zscore(TPM_table_only_control)
 new_zscore_tpm_table <- zscore_tpm_table[ , colSums(is.na(zscore_tpm_table))==0]
 write.csv(new_zscore_tpm_table, "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/zscore_tpm_table_only_control.csv", row.names = T, sep = "\t")
 
+#transpose it, because zscore function gives an transposed table
 zscore_transposed <- as.data.frame(t(new_zscore_tpm_table))
 ########################################################################
 ########################### Filter stuff ###############################
 ########################################################################
 
 # filter for transcription factors
+# 
 Ath_TF_list <- read.delim("~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net/data/Ath_TF_list.txt", row.names = 1)
 
+#only keep unique gene_ids
 TF_filtered_list <- unique(Ath_TF_list$Gene_ID)
-
+#filter tpm and zscore tpm table for transcription factors
 TPM_table_only_control_filtered_tf <- TPM_table_only_control[rownames(TPM_table_only_control) %in% TF_filtered_list,]
 zscore_tpm_table_filtered_tf <- zscore_transposed[rownames(zscore_transposed) %in% TF_filtered_list,]
 
+# write tables to csv with , as separator
 write.csv(TPM_table_only_control_filtered_tf, "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/tpm_table_filterd_tf.csv", row.names = T)
 write.csv(zscore_tpm_table_filtered_tf, "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/zscore_tpm_table_filterd_tf.csv", row.names = T)
 
 
 
 #export this to a new file
+#filter unique combined samples from exploratory_data_figures and write to file
+#WILL ONLY WORK WHEN EXPLORATORY_DATA_FIGURES.R IS LOADED AND RUN IN R-STUDIO!!!
 TPM_table_only_control_filtered <- TPM_table_only_control[rownames(TPM_table_only_control) %in% unique_combined_selected_samples,]
 write.csv(TPM_table_only_control_filtered, "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/tpm_table_filterd_quadrants.csv", row.names = T)
 
@@ -42,6 +48,8 @@ zscore_tpm_table_filtered <- zscore_transposed[rownames(zscore_transposed) %in% 
 write.csv(zscore_tpm_table_filtered, "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/zscore_tpm_table_filterd_quadrants.csv", row.names = T)
  
 # get sample color
+# CREATE DATASET FOR UNIQUE COLOR FOR CONDITION AND SAMPLE MORE EXPRESSED DATA AND EXPORT TO CSV IN THE END.
+# CURRENTLY NOT USED IN ANY OTHER PART OF THE PROJECT
 condition_rowname_2 <- rownames(condition_subdf[rownames(condition_subdf) %in% rownames(condition_df[["q2"]]),]) #1
 condition_rowname_3 <- rownames(condition_subdf[rownames(condition_subdf) %in% rownames(condition_df[["q3"]]),]) #2
 samples_rowname_2 <- rownames(samples_subdf[rownames(samples_subdf) %in% rownames(samples_df[["q2"]]),]) #3
