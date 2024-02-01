@@ -1,0 +1,17 @@
+raw_phenotype_data <- read_excel(
+  "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/phenotype_stuff/raw_phenotype_data.xlsx")
+phenotypes <- read_delim(
+  "~/WUR/Internship/Internship/to_git/UoY_internship_EzerLab/elastic_net_test/data/phenotypes.csv")
+
+library(naniar)
+raw_phenotype_data %>% replace_with_na_if(replace =  list(raw_phenotype_data$`Days to flowering` < 0))
+
+View(raw_phenotype_data)
+                         
+                         
+
+                         
+per_sample<- split(raw_phenotype_data, raw_phenotype_data$Genotype)
+phenotypes_to_use <- phenotypes$...1
+View(phenotypes_to_use)
+print(per_sample)
