@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#SBATCH --job-name=output_run_gatk_with_bqsr_for_parents             # Job name
+#SBATCH --partition=nodes                             # What partition the job should run on
+#SBATCH --time=2:00:00                             # Time limit (DD-HH:MM:SS)
+#SBATCH --ntasks=1                                    # Number of MPI tasks to request
+#SBATCH --cpus-per-task=1                            # Number of CPU cores per MPI task
+#SBATCH --mem=20G                                     # Total memory to request
+#SBATCH --account=biol-gnplant-2019                   # Project account to use
+#SBATCH --mail-type=ALL                               # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=gsq505@york.ac.uk                 # Where to send mail
+#SBATCH --output=%x-%j.log                            # Standard output log
+#SBATCH --error=%x-%j.err                             # Standard error log
+#SBATCH --array=1-139                                 # Array range
+
+# Abort if any command fails
+set -e
+
+# Purge any previously loaded modules
+module purge
+
+# Load modules
+module load GATK/4.3.0.0-GCCcore-11.3.0-Java-11
+
+#commands to run 
+
+directory=$(sed "${SLURM_ARRAY_TASK_ID}q;d" "/mnt/scratch/users/gsq505/folders_in_mapping_data.txt")
+sample_name=$directory
+echo $sample_name
+
+
+gatk AddOrReplaceReadGroups \
+       I="/mnt/scratch/users/gsq505/mapping_data/${sample_name}/Aligned.sortedByCoord.out.bam" \
+       O="/mnt/scratch/users/gsq505/mapping_data/${sample_name}/Aligned_with_sample_name.sortedByCoord.out.bam" \
+       RGID=1 \
+	   RGLB=lib \
+       RGPL=ILLUMINA \
+       RGPU=unit \
+       RGSM=${sample_name}
+

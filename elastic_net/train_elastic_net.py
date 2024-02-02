@@ -180,13 +180,13 @@ if __name__ == "__main__":
         # run linear regression with only fixed l1_ratio
         print("Running elastic nets with fixed l1_ratio ...")
 
-        print("Leaf size with all genes, l1_ratio = 0.5")
+        print("Leaf size with all genes, l1_ratio = 0.10")
         leaf_enet_output = run_model_with_parallel_loocv(
             expr_df,
             pheno_df["average_flowering_time"],
             functools.partial(
                 elastic_net_model_fn,
-                l1_list = [.5]
+                l1_list = [.10]
             )
         )
         pickle.dump(leaf_enet_output, open("elastic_net/outputs/leaf_enet_05.sav", "wb"))
